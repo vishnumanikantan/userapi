@@ -12,7 +12,7 @@ router.post('/login', userController.loginUser);
 router.get('/', middleware.userAuth, userController.getUserDetails);
 
 // User login listing --- /users/login - GET
-router.get('/login');
+router.get('/login', middleware.userAuth, userController.getUserLogin);
 
 
 

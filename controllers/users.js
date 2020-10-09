@@ -1,9 +1,11 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const UserLogin = require('../models/UserLogin');
 const accConfig = require('../config/account');
 const jwtConfig = require('../config/jwt');
-
+const serverConfig = require('../config/server');
+const timeoffset = serverConfig[process.env.NODE_ENV].timeoffset;
 
 const registerUser = (req, res) => {
   let {name, email, password} = req.body;
@@ -66,6 +68,16 @@ const loginUser = (req, res) => {
                     console.log(err);
                     return res.json({success: false, message: 'ERR_LOGGING_IN'});
                   } else {
+                    let newLogin = new UserLogin({
+                        user: user._id,
+                        token: token,
+                        time: new Date().getTime() + timeoffset
+                    })
+                    // save the login token
+                    newLogin.save().then(()=>{
+                        console.log('login saved')
+                    }).catch(err=>{console.log(err)});
+
                     res.setHeader('Authentication', token);
                     return res.json({success: true});
                   }
@@ -95,8 +107,19 @@ const getUserDetails = (req, res) => {
     return res.json({success: true, user: {_id, name, email}});
 }
 
+const getUserLogin = (req, res) => {
+    UserLogin.find({user: req.user._id}, 'token time').then(logins => {
+        return res.json({success: true, logins});
+    })
+    .catch((err) => {
+        console.log(err);
+        res.json({success: false, message: 'ERR_FETCHING_LOGINS'});
+    });
+}
+
 module.exports = {
   registerUser,
   loginUser,
-  getUserDetails
+  getUserDetails,
+  getUserLogin
 };

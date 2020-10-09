@@ -1,6 +1,11 @@
 const jwt = require('jsonwebtoken');
+const redis = require('redis');
 const Users = require('../models/User');
 const jwtConfig = require('../config/jwt');
+const REDIS_PORT = 6379;
+
+
+const client = redis.createClient(REDIS_PORT);
 
 const userAuth = (req, res, next) => {
   let token = req.get('Authentication');
