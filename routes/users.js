@@ -3,7 +3,7 @@ const userController = require('../controllers/users');
 const middleware = require('../middlewares');
 
 // Register user --- /users/ - POST
-router.post('/');
+router.post('/', userController.registerUser);
 
 // Login user --- /users/login - POST
 router.post('/login');
