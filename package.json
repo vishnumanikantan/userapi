@@ -1,0 +1,30 @@
+{
+  "name": "rest-api-accubits",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vishnumanikantan/userapi.git"
+  },
+  "author": "Vishnu Manikantan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vishnumanikantan/userapi/issues"
+  },
+  "homepage": "https://github.com/vishnumanikantan/userapi#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dot-env": "0.0.1",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.10.8"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
