@@ -6,7 +6,7 @@ const middleware = require('../middlewares');
 router.post('/', userController.registerUser);
 
 // Login user --- /users/login - POST
-router.post('/login');
+router.post('/login', userController.loginUser);
 
 // Get user details --- /users/ - GET
 router.get('/');
