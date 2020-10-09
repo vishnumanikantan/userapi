@@ -9,7 +9,7 @@ router.post('/', userController.registerUser);
 router.post('/login', userController.loginUser);
 
 // Get user details --- /users/ - GET
-router.get('/');
+router.get('/', middleware.userAuth, userController.getUserDetails);
 
 // User login listing --- /users/login - GET
 router.get('/login');

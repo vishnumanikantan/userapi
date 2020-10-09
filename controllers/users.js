@@ -26,8 +26,8 @@ const registerUser = (req, res) => {
       newUser
         .save()
         .then((user) => {
-          user.password = undefined;
-          return res.json({success: true, user});
+          let {_id, name, email} = user;
+          return res.json({success: true, user: {_id, name, email}});
         })
         .catch((err) => {
           console.log(err);
@@ -90,7 +90,13 @@ const loginUser = (req, res) => {
     });
 };
 
+const getUserDetails = (req, res) => {
+    let {_id, name, email} = req.user;
+    return res.json({success: true, user: {_id, name, email}});
+}
+
 module.exports = {
   registerUser,
-  loginUser
+  loginUser,
+  getUserDetails
 };
